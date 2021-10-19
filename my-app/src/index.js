@@ -50,6 +50,7 @@ class Game extends React.Component {
       squares: this.initialGame(),
       maskOn: Array(80).fill(true),
       maskOff: 0,
+      explode: false,
     };
   }
 
@@ -176,6 +177,7 @@ class Game extends React.Component {
         squares: squares,
         maskOn: maskOn,
         maskOff: maskOff,
+        explode: true,
       });
 
       console.log("game over");
@@ -201,10 +203,12 @@ class Game extends React.Component {
   render() {
     const gameOver = this.calculateResult();
     let status;
-    if (gameOver) {
+    if (this.state.explode) {
+      console.log("you lose");
+      status = "You lose :(";
+    } else if (gameOver) {
       console.log("you win!!!");
-      status = "You win";
-      //return;
+      status = "You win!!!";
     } else {
       status = "continue";
     }
